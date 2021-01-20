@@ -13,21 +13,21 @@ tag = ''
 legend_buf = ['', 'DDPG', '']
 
 ## Embedding dim
-# load_dir_buf = [
-#                 'halfcheetah-type1/halfcheetah-type1-20201102-214433/',
-#                 'halfcheetah-type1/halfcheetah-type1-20201102-202101/',
-#                 'halfcheetah-type1/halfcheetah-type1-20201103-082949/',
-#                 ]
-# tag = 'Encode_dim'
-# legend_buf = ['$R^{240}$', '$R^{160}$', '$R^{80}$']
+load_dir_buf = [
+                'halfcheetah-type1/halfcheetah-type1-20201102-214433/',
+                'halfcheetah-type1/halfcheetah-type1-20201102-202101/',
+                'halfcheetah-type1/halfcheetah-type1-20201103-082949/',
+                ]
+tag = 'Encode_dim'
+legend_buf = ['$R^{240}$', '$R^{160}$', '$R^{80}$']
 
 ## Ablation Exp.
-load_dir_buf = ['halfcheetah-type1/halfcheetah-type1-20201102-202101/',
-                'halfcheetah-type1/halfcheetah-type1-20201102-202101/actor_trajectory-',
-                'halfcheetah-type1/halfcheetah-type1-20201102-202101/encoder-',
-                ]
-tag = 'Ablation'
-legend_buf = ['Complete EPG', 'No Embedding', 'No Policy']
+# load_dir_buf = ['halfcheetah-type1/halfcheetah-type1-20201102-202101/',
+#                 'halfcheetah-type1/halfcheetah-type1-20201102-202101/actor_trajectory-',
+#                 'halfcheetah-type1/halfcheetah-type1-20201102-202101/encoder-',
+#                 ]
+# tag = 'Ablation'
+# legend_buf = ['Complete EPG', 'No Embedding', 'No Policy']
 
 
 color_buf = ['blue', 'red', 'green', 'black']
@@ -96,5 +96,5 @@ plt.xlim([1, 4000])
 exp_type = load_dir_buf[0].split('/')[0]
 
 plt.tight_layout()
-plt.savefig(os.path.join('./figure', exp_type + tag + '-auc_time.pdf'))
+# plt.savefig(os.path.join('./figure', exp_type + tag + '-auc_time.pdf'))
 plt.show()

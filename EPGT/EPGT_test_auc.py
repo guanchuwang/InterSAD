@@ -13,7 +13,7 @@ import os
 
 from deep_rl import *
 
-from LSTM_PAD_type1 import Encoder, Decoder, Actor, Critic, MDPset
+from EPGT_train import Encoder, Decoder, Actor, Critic, MDPset
 from hyperparameter_test import *
 
 from sklearn.ensemble import IsolationForest
@@ -21,13 +21,13 @@ from sklearn.svm import OneClassSVM
 from sklearn.neighbors import LocalOutlierFactor
 
 # halfcheetah
-# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-111722' # state_noise_std = 0.05 dim=16 good
+load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-111722' # state_noise_std = 0.05 dim=16 good
 
 # walker
 # load_dir = 'walker-type1/walker-type1-20201021-150642' # state_noise_std = 0.05 dim=14
 
 # ant
-load_dir = 'ant-type1/ant-type1-20201021-154917' # state_noise_std = 0.05 dim=18
+# load_dir = 'ant-type1/ant-type1-20201021-154917' # state_noise_std = 0.05 dim=18
 
 
 if load_dir[0:3] == 'hal':

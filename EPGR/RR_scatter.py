@@ -13,8 +13,9 @@ import copy
 
 from deep_rl import *
 
-from LSTM_PAD_type2 import Encoder, Actor, Critic, Virtual_Userset, Virtual_User
 from hyperparameter_test import *
+
+from EPGR_train import Virtual_Userset, Virtual_User
 
 from sklearn.ensemble import IsolationForest
 from sklearn.svm import OneClassSVM
@@ -129,8 +130,8 @@ plt.xlabel('Dimension 1', fontsize=25)
 plt.ylabel('Dimension 2', fontsize=25)
 
 plt.tight_layout()
-plt.savefig('figure/' + args.exp + '-type' + str(args.type) \
-            + '-random_action-heatmap' + '.pdf')
+# plt.savefig('figure/' + args.exp + '-type' + str(args.type) \
+#             + '-random_action-heatmap' + '.pdf')
 plt.show()
 
 

@@ -12,7 +12,7 @@ import copy
 
 from deep_rl import *
 
-from LSTM_PAD_type2 import Encoder, Actor, Critic, Virtual_Userset, Virtual_User
+from EPGR_train import Encoder, Actor, Critic, Virtual_Userset, Virtual_User
 from hyperparameter_test import *
 
 from sklearn.ensemble import IsolationForest
@@ -24,8 +24,8 @@ load_dir = 'virtual_taobao-type2/virtual_taobao-type2-20201028-202226'
 
 args = copy.deepcopy(args_virtual_taobao_type2)
 
-anomaly_prob = [0.3, -0.3]
-with open('./user_characteristic_buf_100000_seed7.pkl', 'rb') as r:
+anomaly_prob = [0.1, -0.1]
+with open('./user_characteristic_buf_100.pkl', 'rb') as r:
     user_characteristic_buf = pickle.load(r)
 
 learn_step = 1000
@@ -46,9 +46,9 @@ roc_auc_buf = torch.zeros((repeat_time,))
 for repeat in range(repeat_time):
 
     userset = Virtual_Userset(template_mdp=args.template_mdp,
-                              user_num=10000,  # args.user_num,
+                              user_num=100,  # args.user_num,
                               user_characteristic_buf=user_characteristic_buf,
-                              anomaly_num=100,
+                              anomaly_num=10,
                               anomaly_prob=anomaly_prob, )
 
     state_dim = userset.template_mdp.observation_space.shape[0]

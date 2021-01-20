@@ -12,8 +12,7 @@ import copy
 
 from deep_rl import *
 
-from LSTM_PAD_type1 import MDPset
-from DDPG_agent import Agent, Actor, Critic
+from EPGT_train import Encoder, Decoder, Actor, Critic, MDPset
 from hyperparameter_test import *
 
 from sklearn.ensemble import IsolationForest
@@ -21,41 +20,48 @@ from sklearn.ensemble import IsolationForest
 
 # from pybullet_envs.gym_locomotion_envs import HalfCheetah_Type2Anomaly_BulletEnv
 
+# def main():
+
 # random_seed(10)
 
-# halfcheetah
-# load_dir = 'DDPG-halfcheetah-type1/halfcheetah-type1-20201022-152429' #
-
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201012-175741-success' # state_noise_std = 0.05 dim=16
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201013-123905-success' # state_noise_std = 0.05 dim=8
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201013-132427-success' # state_noise_std = 0.05 dim=32
+load_dir = 'halfcheetah-type1/halfcheetah-type1-20201102-202101' # state_noise_std = 0.05 dim=16
 # hopper
-# load_dir = 'DDPG-hopper-type1/hopper-type1-20201022-153958' #
+# load_dir = 'hopper-type1/hopper-type1-20201020-003934'
+# load_dir = 'hopper-type1/hopper-type1-20201020-082123'
+# load_dir = 'hopper-type1/hopper-type1-20201021-164354'
 
 # walker
-# load_dir = 'DDPG-walker-type1/walker-type1-20201022-154509' #
+# load_dir = 'walker-type1/walker-type1-20201020-224319' # state_noise_std = 0. dim=14
+# load_dir = 'walker-type1/walker-type1-20201021-013018' # state_noise_std = 0. dim=7
+# load_dir = 'walker-type1/walker-type1-20201021-150642' # state_noise_std = 0.05 dim=14
 
 # ant
-load_dir = 'DDPG-ant-type1/ant-type1-20201022-160140'
+# load_dir = 'ant-type1/ant-type1-20201021-154917' # state_noise_std = 0.05 dim=18
 
-if load_dir[5:8] == 'hal':
+
+if load_dir[0:3] == 'hal':
     args = copy.deepcopy(args_half_cheetah_type1)
-elif load_dir[5:8] == 'hop':
+elif load_dir[0:3] == 'hop':
     args = copy.deepcopy(args_hopper_type1)
-elif load_dir[5:8] == 'wal':
+elif load_dir[0:3] == 'wal':
     args = copy.deepcopy(args_walker_type1)
-elif load_dir[5:8] == 'ant':
+elif load_dir[0:3] == 'ant':
     args = copy.deepcopy(args_ant_type1)
 
 
 # learn_step_buf = [0, 1000, 2000, 3000, 4000, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000]
-learn_step_buf = list(range(0, 5100, 100))
+learn_step_buf = list(range(0, 4100, 100))
 # learn_step_buf = list(range(5000, 10100, 100))
-# learn_step_buf = list(range(0, 1100, 100))
+# learn_step_buf = list(range(0, 2100, 100))
 
-mdps = MDPset(mdp_num=100, # args.mdp_num,
+mdps = MDPset(mdp_num=args.mdp_num,
               template_mdp=args.template_mdp,
               inlier_mdps=args.inlier_mdps,  # 'HalfCheetahBulletmdp-v0',
               outlier_mdps=args.outlier_mdps,  # ['HalfCheetahBrother_0_06_BulletEnv-v0'],
-              # outlier_mdps=[HalfCheetah_Type2Anomaly_BulletEnv(noise_std=0.01)],  # ['HalfCheetahBrother_0_06_BulletEnv-v0'],
-              outlier_rate=args.outlier_rate)
+              outlier_num=args.outlier_num)
 
 state_dim = mdps.template_mdp.observation_space.shape[0]
 action_dim = mdps.template_mdp.action_space.shape[0]
@@ -74,13 +80,12 @@ for idx, learn_step in enumerate(learn_step_buf):
     critic = torch.load(load_dir + '/critic/critic_' + str(learn_step) + '.pkl')
 
     outlier_score = torch.tensor([0. for mdp in mdps.mdp_buf])
-    state_action_time_series = torch.zeros((args.mdp_num, args.trajectory_len, state_dim))
-    critic_time_series = torch.zeros((args.mdp_num, args.trajectory_len, state_dim+action_dim))
+    state_action_time_series = torch.zeros((args.mdp_num, args.trajectory_len, state_dim + action_dim))
 
     for mdp_index in range(args.mdp_num):
         mdp = mdps.mdp_buf[mdp_index]
         state_noise = np.random.normal(0, args.state_noise_std, (state_dim, ))
-        state = state_normalizer(mdp.reset() + state_noise) # state_normalizer(mdp.reset() + state_noise)
+        state = mdp.reset() + state_noise # state_normalizer(mdp.reset() + state_noise)
         # print(state)
         for step in range(args.trajectory_len):
             state_tensor = torch.tensor(state, dtype=torch.float)
@@ -90,21 +95,14 @@ for idx, learn_step in enumerate(learn_step_buf):
 
             state_noise = np.random.normal(0, args.state_noise_std, (state_dim,))
             nxt_state += state_noise # state_normalizer(nxt_state + np.random.normal(0, 0.05, (state_dim, )))
-            nxt_state = state_normalizer(nxt_state)
-
-            critic_time_series[mdp_index, step] = critic(state_tensor.unsqueeze(dim=0), action_tensor.unsqueeze(dim=0)).detach()
-            # critic_time_series[mdp_index, step] = reward
-            # state_action_time_series[mdp_index, step] = torch.cat((state_tensor, action_tensor), dim=0)
-            # state_action_time_series[mdp_index, step] = torch.from_numpy(nxt_state)
+            state_action_time_series[mdp_index, step] = torch.cat((state_tensor, action_tensor), dim=0)
             state = nxt_state
             # print(action_tensor)
 
-    # mdp_time_series = state_action_time_series.reshape(args.mdp_num, -1).detach()
-    mdp_time_series = critic_time_series.reshape(args.mdp_num, -1).detach()
+    mdp_time_series = state_action_time_series.reshape(args.mdp_num, -1).detach()
 
     clf = IsolationForest()
     # clf = OneClassSVM()
-
     clf.fit(mdp_time_series)
     outlier_score = -clf.decision_function(mdp_time_series)
     false_positive_rate, true_positive_rate, thresholds = roc_curve(mdps.mdp_label, outlier_score)
@@ -114,14 +112,14 @@ for idx, learn_step in enumerate(learn_step_buf):
 
     roc_auc_buf[idx] = roc_auc
 
-np.savetxt(load_dir + '/' + 'roc_auc.txt', roc_auc_buf)
+np.savetxt(load_dir + '/actor_trajectory-roc_auc.txt', roc_auc_buf)
 
 time = np.array(learn_step_buf)
 plt.plot(time, roc_auc_buf)
 plt.xlabel('step')
 plt.ylabel('ROC/AUC')
 # plt.legend(loc='lower right')
-plt.savefig(load_dir + '/' + args.exp + '-type' + str(args.type) + '.png')
+plt.savefig(load_dir + '/actor_trajectory-' + args.exp + '-type' + str(args.type) + '.png')
 plt.show()
 
 # # outlier_critic = critic_buf[mdps.outlier_index]

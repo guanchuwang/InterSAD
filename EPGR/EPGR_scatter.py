@@ -14,7 +14,7 @@ import copy
 
 from deep_rl import *
 
-from LSTM_PAD_type2 import Encoder, Actor, Critic, Virtual_Userset, Virtual_User
+from EPGR_train import Encoder, Actor, Critic, Virtual_Userset, Virtual_User
 from hyperparameter_test import *
 
 from sklearn.ensemble import IsolationForest
@@ -154,8 +154,8 @@ plt.xlabel('Dimension 1', fontsize=25)
 plt.ylabel('Dimension 2', fontsize=25)
 
 plt.tight_layout()
-plt.savefig('figure/' + args.exp + '-type' + str(args.type) \
-            + '-PAD-heatmap' + '.pdf')
+# plt.savefig('figure/' + args.exp + '-type' + str(args.type) \
+#             + '-PAD-heatmap' + '.pdf')
 plt.show()
 
 # roc_auc_ave = roc_auc_buf.mean()

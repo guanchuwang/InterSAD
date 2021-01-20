@@ -12,7 +12,7 @@ import copy
 
 from deep_rl import *
 
-from LSTM_PAD_type1 import Encoder, Decoder, Actor, Critic, MDPset
+from EPGT_train import Encoder, Decoder, Actor, Critic, MDPset
 from hyperparameter_test import *
 
 from sklearn.ensemble import IsolationForest
