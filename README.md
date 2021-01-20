@@ -4,6 +4,8 @@
 ### Abstract
 Anomalous patterns widely exist in real-world Markov decision process (MDP), such as users' malicious clicks in a recommender system or unpredictable responses in controlling systems.
 
+![image](https://github.com/HeGsnS/EPG/blob/main/EPGR/figure/user_attack_recsim.png)
+
 Motivated by this, we study anomaly detection in MDP systems in this work, which is a challenging problem because:
 
 - Existing work lacks formal definitions for anomalous patterns in MDP.
