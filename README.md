@@ -3,10 +3,16 @@
 
 ### Abstract
 Anomalous patterns widely exist in real-world Markov decision process (MDP), such as users' malicious clicks in a recommender system or unpredictable responses in controlling systems.
-Motivated by this, we study anomaly detection in MDP systems in this work, which is a challenging problem because (i) existing work lacks formal definitions for anomalous patterns in MDP;
-(ii) the detector needs to interact with the environment to progressively collect the data, which contradicts the assumptions of many traditional anomaly detectors that operate on static datasets; (iii) the state and action spaces of real-world MDPs can be continuous and noisy with high-dimension, which poses challenges in the efficiency of the algorithms. 
+
+Motivated by this, we study anomaly detection in MDP systems in this work, which is a challenging problem because:
+
+- Existing work lacks formal definitions for anomalous patterns in MDP.
+- The detector needs to interact with the environment to progressively collect the data, which contradicts the assumptions of many traditional anomaly detectors that operate on static datasets.
+- the state and action spaces of real-world MDPs can be continuous and noisy with high-dimension, which poses challenges in the efficiency of the algorithms. 
+
 To tackle these challenges, we formalize the anomalous rewards and state transition in MDP, and propose Equilibrious Policy Gradient (EPG) for end-to-end anomaly detection in MDP. 
 In EPG, the policy minimizes the pair-wise distances of normal system representations to encourage consistent trajectories in normal MDP systems and isolate anomalous ones. 
+
 Experiments on two benchmark environments, including user attack detection in recommender systems and anomalous robotic system detection, demonstrate the superiority of EPG compared with baselines.
 
 
