@@ -33,9 +33,9 @@ from sklearn.svm import OneClassSVM
 # load_dir = 'halfcheetah-type1/halfcheetah-type1-20201102-214433' # state_noise_std = 0.05 dim=24
 # load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-082949' # state_noise_std = 0.05 dim=8
 
-# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-111722' # state_noise_std = 0.05 dim=16 复现
-# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-115530' # state_noise_std = 0.05 dim=16 复现
-# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-124532' # state_noise_std = 0.05 dim=16 复现
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-111722' # state_noise_std = 0.05 dim=16
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-115530' # state_noise_std = 0.05 dim=16
+# load_dir = 'halfcheetah-type1/halfcheetah-type1-20201103-124532' # state_noise_std = 0.05 dim=16
 load_dir = 'halfcheetah-type1/halfcheetah-type1-20201212-164030'
 
 # hopper
