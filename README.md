@@ -25,7 +25,7 @@ seaborn>=0.9.0
 To train EPG/T on *VirtualTaobao*, run
 ````angular2html
 cd EPGR
-python EPGR_train.py --exp virtual_tao
+python EPGR_train.py --exp virtual_taobao
 cd ../
 ````
 
