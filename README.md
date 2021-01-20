@@ -1,7 +1,7 @@
 ### Source Code for Towards Anomaly Detection in Markov Decision Process
 
 
-#### Abstract
+### Abstract
 Anomalous patterns widely exist in real-world Markov decision process (MDP), such as users' malicious clicks in a recommender system or unpredictable responses in controlling systems.
 Motivated by this, we study anomaly detection in MDP systems in this work, which is a challenging problem because (i) existing work lacks formal definitions for anomalous patterns in MDP;
 (ii) the detector needs to interact with the environment to progressively collect the data, which contradicts the assumptions of many traditional anomaly detectors that operate on static datasets; (iii) the state and action spaces of real-world MDPs can be continuous and noisy with high-dimension, which poses challenges in the efficiency of the algorithms. 
@@ -10,7 +10,7 @@ In EPG, the policy minimizes the pair-wise distances of normal system representa
 Experiments on two benchmark environments, including user attack detection in recommender systems and anomalous robotic system detection, demonstrate the superiority of EPG compared with baselines.
 
 
-#### Dependency:
+### Dependency:
 ````angular2html
 scikit-learn>=0.23.1
 torch>=1.7.0 
@@ -20,7 +20,7 @@ matplotlib>=2.2.3
 seaborn>=0.9.0
 ````
 
-#### Reproduce our results:
+### Reproduce our results:
 
 To train EPG/T on *VirtualTaobao*, run
 ````angular2html
@@ -85,7 +85,7 @@ python auc_plot_trajectory_length.py
 cd ../
 ````
 
-#### Device Information of Developer:
+### Device Information of Developer:
 
 | Device attribute | Value |
 | ---------------- | ----- |
