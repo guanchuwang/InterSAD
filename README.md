@@ -101,4 +101,4 @@ cd ../
 | Memory | 8GB |
 | Operating system | Linux |
 | EPG/R training time | 0.5 CPU sec/step×1000 steps  |
-| EPG/T training time | 0.5 CPU sec/step×2000 steps  ！
+| EPG/T training time | 0.5 CPU sec/step×2000 steps  |
