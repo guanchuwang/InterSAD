@@ -1,4 +1,4 @@
-### Towards Anomaly Detection in Markov Decision Process
+### Source Code for Towards Anomaly Detection in Markov Decision Process
 
 
 #### Abstract
@@ -26,52 +26,73 @@ To train EPG/T on *VirtualTaobao*, run
 ````angular2html
 cd EPGR
 python EPGR_train.py --exp virtual_tao
+cd ../
 ````
 
 To reproduce Table 1, run 
 ````angular2html
 cd EPGR
 python EPGR_test_auc.py
+cd ../
 ````
 
 To reproduce Figure 4(a), run
 ````angular2html
 cd EPGR
 python EPGR_scatter.py
+cd ../
 ````
 
 To reproduce Figure 4(b), run
 ````angular2html
 cd EPGR
 python RR_scatter.py
+cd ../
 ````
 
 To train EPG/T on *HalfCheetah*, run
 ````angular2html
 cd EPGT
-python EPGT_train.py
+python EPGT_train.py --exp halfcheetah
+cd ../
 ````
 
 To reproduce Table 2, run
 ````angular2html
 cd EPGT
-python EPGT_test_auc.py --exp halfcheetah
+python EPGT_test_auc.py 
+cd ../
+````
+
+To reproduce Figures 5 (a) and (b), run 
+````angular2html
+cd EPGT
+python auc_plot.py
+cd ../
 ````
 
 To reproduce Figure 6 (a), run
 ````angular2html
 cd EPGT
-python EPGT_test_sampling_number.py
-
+python auc_plot_sampling_number.py
+cd ../
 ````
 
 To reproduce Figure 6 (b), run
 ````angular2html
 cd EPGT
-python EPGT_test_trajectory_length.py
+python auc_plot_trajectory_length.py
+cd ../
 ````
 
-#### More Explanation
+#### Device Information of Developer:
 
-We only share one of our trained policy and embedding networks for EPG/R and EPG/T due to the storage limitation of one repository. 
-To reproduce Figures 5 (a) and (b), please first run *EPGT_train.py* to train the neural network.
+| Device attribute | Value |
+| ---------------- | ----- |
+| Computing infrastructure | CPU |
+| CPU model | Intel Core i5 |
+| Basic frequency | 1.4GHz |
+| Memory | 8GB |
+| Operating system | Linux |
+| EPG/R training time | 0.5 CPU sec/step×1000 steps  |
+| EPG/T training time | 0.5 CPU sec/step×2000 steps  ！
