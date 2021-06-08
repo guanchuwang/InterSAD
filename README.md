@@ -123,5 +123,5 @@ cd ../
 | Basic frequency | 1.4GHz |
 | Memory | 8GB |
 | Operating system | Linux |
-| InterSAD-R training efficiency | 0.5 CPU sec/iteration  |
 | InterSAD-T training efficiency | 0.5 CPU sec/iteration  |
+| InterSAD-R training efficiency | 0.5 CPU sec/iteration  |
