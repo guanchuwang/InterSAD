@@ -1,4 +1,4 @@
-## Source Code of Towards Anomaly Detection in Markov Decision Process
+## Source Code of Interactive System-wise Anomaly Detection
 
 
 ### Abstract
@@ -13,9 +13,9 @@ This is a challenging problem due to the fact that:
 To address these challenge, we 
 - Adopt Markov Decision Process (MDP) to formulate the interactive systems, and formally define \emph{anomalous system} including the anomalous transition and reward systems;
 - Propose an Interactive System-wise Anomaly Detection (InterSAD) method which adopts an encoder-decoder to learn the embedding of the systems, and learn a policy to neutralize the system embeddings so that the anomalous systems can be isolated according to inconsistent behaviors;
-- Adopt Experience Replay Mechanism~(ERM) to stabilize the training process by enqueuing the data collected from the real-time interaction to the replay buffer and resampling the data for training, which encourages more stationary distribution of the training data.
+- Adopt Experience Replay Mechanism (ERM) to stabilize the training process by enqueuing the data collected from the real-time interaction to the replay buffer and resampling the data for training, which encourages more stationary distribution of the training data.
 
-Experiments on two benchmark environments, including identifying the anomalous robotic system and attack detection in recommender systems, demonstrate the superiority of \Algnameabbr{} compared with baselines.
+Experiments on two benchmark environments, including identifying the anomalous robotic system and attack detection in recommender systems, demonstrate the superiority of InterSAD compared with baselines.
 
 
 ### Dependency:
