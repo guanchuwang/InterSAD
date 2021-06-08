@@ -123,5 +123,5 @@ cd ../
 | Basic frequency | 1.4GHz |
 | Memory | 8GB |
 | Operating system | Linux |
-| EPG/R training time | 0.5 CPU sec/step×1000 steps  |
-| EPG/T training time | 0.5 CPU sec/step×2000 steps  |
+| InterSAD-R training efficiency | 0.5 CPU sec/iteration  |
+| InterSAD-T training efficiency | 0.5 CPU sec/iteration  |
