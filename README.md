@@ -2,18 +2,20 @@
 
 
 ### Abstract
-Anomalous patterns widely exist in real-world Markov decision process (MDP), such as users' malicious clicks in a recommender system or unpredictable responses in controlling systems.
 
-Motivated by this, we study anomaly detection in MDP systems in this work, which is a challenging problem because:
+Existing work is incapable to formulate the anomaly detection problem of interactive scenarios where the behaviors of each system could not be explicitly observed as data unless an activation signal is provided, and anomalous systems tend to behave or response differently from others due to the faulted or malicious inner characteristics.
+This is a challenging problem due to the fact that:
 
-- Existing work lacks formal definitions for anomalous patterns in MDP.
-- The detector needs to interact with the environment to progressively collect the data, which contradicts the assumptions of many traditional anomaly detectors that operate on static datasets.
-- the state and action spaces of real-world MDPs can be continuous and noisy with high-dimension, which poses challenges in the efficiency of the algorithms. 
+- Existing work lacks formal definitions for interactive systems-wise anomaly detection;
+- It relies on real-time interaction with the systems to progressively collect the data for learning the detector, which contradicts the assumptions of traditional anomaly detection that operate on static datasets; 
+- The data collected from real-time interaction with the systems has non-stationary and noisy distribution, which can terribly affect the stability of training procedure.
 
-To tackle these challenges, we formalize the anomalous rewards and state transition in MDP, and propose Equilibrious Policy Gradient (EPG) for end-to-end anomaly detection in MDP. 
-In EPG, the policy minimizes the pair-wise distances of normal system representations to encourage consistent trajectories in normal MDP systems and isolate anomalous ones. 
+To address these challenge, we 
+- Adopt Markov Decision Process (MDP) to formulate the interactive systems, and formally define \emph{anomalous system} including the anomalous transition and reward systems;
+- Propose an Interactive System-wise Anomaly Detection (InterSAD) method which adopts an encoder-decoder to learn the embedding of the systems, and learn a policy to neutralize the system embeddings so that the anomalous systems can be isolated according to inconsistent behaviors;
+- Adopt Experience Replay Mechanism~(ERM) to stabilize the training process by enqueuing the data collected from the real-time interaction to the replay buffer and resampling the data for training, which encourages more stationary distribution of the training data.
 
-Experiments on two benchmark environments, including user attack detection in recommender systems and anomalous robotic system detection, demonstrate the superiority of EPG compared with baselines.
+Experiments on two benchmark environments, including identifying the anomalous robotic system and attack detection in recommender systems, demonstrate the superiority of \Algnameabbr{} compared with baselines.
 
 
 ### Dependency:
@@ -30,63 +32,84 @@ seaborn>=0.9.0
 
 To train EPG/R on *VirtualTaobao*, run
 ````angular2html
-cd EPGR
-python EPGR_train.py --exp virtual_taobao
+cd InterSADR
+python InterSADR_train.py --exp virtual_taobao
 cd ../
 ````
 
-To reproduce Table 1, run 
+To reproduce Table 3, run 
 ````angular2html
-cd EPGR
-python EPGR_test_auc.py
+cd InterSADR
+python InterSADR_test_auc.py
 cd ../
 ````
 
-To reproduce Figure 4(a), run
+To reproduce Figure 5(a), run
 ````angular2html
-cd EPGR
-python EPGR_scatter.py
+cd InterSADR
+python auc_vs_var_plot.py
 cd ../
 ````
 
-To reproduce Figure 4(b), run
+To reproduce Figure 5(b), run
 ````angular2html
-cd EPGR
+cd InterSADR
+python InterSADR_scatter.py
+cd ../
+````
+
+To reproduce Figure 5(c), run
+````angular2html
+cd InterSADR
 python RR_scatter.py
 cd ../
 ````
 
-To train EPG/T on *HalfCheetah*, run
+To train InterSAD-T on *HalfCheetah*, run
 ````angular2html
-cd EPGT
-python EPGT_train.py --exp halfcheetah
+cd InterSADT
+python InterSADT_noSTU.py --exp halfcheetah
 cd ../
 ````
 
 To reproduce Table 2, run
 ````angular2html
-cd EPGT
-python EPGT_test_auc.py 
+cd InterSADT
+python InterSADT_test_auc.py 
 cd ../
 ````
 
-To reproduce Figures 5 (a) and (b), run 
+To reproduce Figures 6 (b), open auc_plot.py, recover lines 22-29, and run
 ````angular2html
-cd EPGT
+cd InterSADT
 python auc_plot.py
 cd ../
 ````
 
-To reproduce Figure 6 (a), run
+To reproduce Figures 6 (c), open auc_plot.py, recover lines 31-38, and run
 ````angular2html
-cd EPGT
-python auc_plot_sampling_number.py
+cd InterSADT
+python auc_plot.py
 cd ../
 ````
 
-To reproduce Figure 6 (b), run
+To reproduce Figures 7 (a), run 
 ````angular2html
-cd EPGT
+cd InterSADT
+python auc_plot_std_noise.py
+cd ../
+````
+
+To reproduce Figures 7 (b), run 
+````angular2html
+cd InterSADT
+python auc_plot.py
+cd ../
+````
+
+To reproduce Figure 7 (c), run
+````angular2html
+cd InterSADT
 python auc_plot_trajectory_length.py
 cd ../
 ````
