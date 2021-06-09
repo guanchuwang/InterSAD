@@ -8,7 +8,7 @@ However, it is challenging for existing methods to handle the scenarios where th
 Appropriate interactions are needed to interact with the systems and identify those with abnormal responses. 
 Detecting system-wise anomalies is a challenging task due to several reasons including: 
 
-- how to formally define the system-wise anomaly detection problem.
+- how to formally define the system-wise anomaly detection problem?
 - how to find the effective activation signal for interacting with systems to progressively collect the data and learn the detector?
 - how to guarantee stable training in such a non-stationary scenario with real-time interactions?
 To address the challenges, we propose InterSAD (Interactive System-wise Anomaly Detection)?
