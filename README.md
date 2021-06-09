@@ -3,19 +3,20 @@
 
 ### Abstract
 
-Existing work is incapable to formulate the anomaly detection problem of interactive scenarios where the behaviors of each system could not be explicitly observed as data unless an activation signal is provided, and anomalous systems tend to behave or response differently from others due to the faulted or malicious inner characteristics.
-This is a challenging problem due to the fact that:
+Anomaly detection, where data instances are discovered containing feature patterns different from the majority, plays a fundamental role in various applications. 
+However, it is challenging for existing methods to handle the scenarios where the instances are systems whose characteristics are not readily observed as data. 
+Appropriate interactions are needed to interact with the systems and identify those with abnormal responses. 
+Detecting system-wise anomalies is a challenging task due to several reasons including: 
 
-- Existing work lacks formal definitions for interactive systems-wise anomaly detection;
-- It relies on real-time interaction with the systems to progressively collect the data for learning the detector, which contradicts the assumptions of traditional anomaly detection that operate on static datasets; 
-- The data collected from real-time interaction with the systems has non-stationary and noisy distribution, which can terribly affect the stability of training procedure.
+- how to formally define the system-wise anomaly detection problem.
+- how to find the effective activation signal for interacting with systems to progressively collect the data and learn the detector?
+- how to guarantee stable training in such a non-stationary scenario with real-time interactions?
+To address the challenges, we propose InterSAD (Interactive System-wise Anomaly Detection)?
 
-To address these challenge, we 
-- Adopt Markov Decision Process (MDP) to formulate the interactive systems, and formally define \emph{anomalous system} including the anomalous transition and reward systems;
-- Propose an Interactive System-wise Anomaly Detection (InterSAD) method which adopts an encoder-decoder to learn the embedding of the systems, and learn a policy to neutralize the system embeddings so that the anomalous systems can be isolated according to inconsistent behaviors;
-- Adopt Experience Replay Mechanism (ERM) to stabilize the training process by enqueuing the data collected from the real-time interaction to the replay buffer and resampling the data for training, which encourages more stationary distribution of the training data.
-
-Experiments on two benchmark environments, including identifying the anomalous robotic system and attack detection in recommender systems, demonstrate the superiority of InterSAD compared with baselines.
+Specifically, first we adopt Markov decision process to model the interactive systems, and define anomalous systems as anomalous transition and anomalous reward systems.
+Then, we develop an end-to-end approach which includes an encoder-decoder module that learns system embeddings, and a policy network to generate effective activation for separating embeddings of normal and anomaly systems. 
+Finally, we design a training method to stabilize the learning process, which includes a replay buffer to store historical interaction data and allow them to be re-sampled.
+Experiments on two benchmark environments, including identifying the anomalous robotic systems and detecting user data poisoning in recommendation models, demonstrate the superiority of InterSAD compared with baselines methods.
 
 
 ### Dependency:
