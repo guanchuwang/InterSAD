@@ -11,8 +11,8 @@ Detecting system-wise anomalies is a challenging task due to several reasons inc
 - how to formally define the system-wise anomaly detection problem?
 - how to find the effective activation signal for interacting with systems to progressively collect the data and learn the detector?
 - how to guarantee stable training in such a non-stationary scenario with real-time interactions?
-To address the challenges, we propose InterSAD (Interactive System-wise Anomaly Detection)?
 
+To address the challenges, we propose InterSAD (Interactive System-wise Anomaly Detection).
 Specifically, first we adopt Markov decision process to model the interactive systems, and define anomalous systems as anomalous transition and anomalous reward systems.
 Then, we develop an end-to-end approach which includes an encoder-decoder module that learns system embeddings, and a policy network to generate effective activation for separating embeddings of normal and anomaly systems. 
 Finally, we design a training method to stabilize the learning process, which includes a replay buffer to store historical interaction data and allow them to be re-sampled.
